@@ -50,3 +50,40 @@ Vec3 rk4_step(const Vec3& p, float dt) {
         p.z + (k1.z + 2*k2.z + 2*k3.z + k4.z) * dt / 6.0f
     );
 }
+
+
+class Trajectory {
+public:
+    std::vector<Vec3> full_path;  // computed path
+    std::vector<Vec3> visible_trail;  // current visible trail
+    Color color;
+    int current_step;
+    
+    Trajectory() : current_step(0) {}
+    
+    void compute(Vec3 initial_pos, int total_steps) {
+        full_path.clear();
+        full_path.reserve(total_steps);
+        
+        Vec3 pos = initial_pos;
+        for (int i = 0; i < total_steps; i++) {
+            full_path.push_back(pos);
+            pos = rk4_step(pos, DT);
+        }
+    }
+    
+    void update() {
+        if (current_step < full_path.size()) {
+            visible_trail.push_back(full_path[current_step]);
+            if (visible_trail.size() > MAX_TRAIL_LENGTH) {
+                visible_trail.erase(visible_trail.begin());
+            }
+            current_step++;
+        }
+    }
+    
+    void reset() {
+        current_step = 0;
+        visible_trail.clear();
+    }
+};
