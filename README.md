@@ -3,7 +3,10 @@
 Visualization of the Lorenz attractor using OpenGL. Zooming in/out, replay, changing initial condition, video recording. 
 
 
-## 🚀 Quick Start
+https://github.com/user-attachments/assets/d611454f-4740-408a-b27b-ff6316ce1cf6
+
+
+## Quick Start
 
 ### Prerequisites
 
