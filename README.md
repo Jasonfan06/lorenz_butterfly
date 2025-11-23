@@ -27,7 +27,7 @@ make
 ./lorenz_butterfly
 ```
 
-## 🎮 Controls
+## Controls
 
 | Key | Action |
 |-----|--------|
@@ -40,18 +40,17 @@ make
 | **Mouse Wheel** | Zoom in/out |
 | **ESC** or **Q** | Quit |
 
-## 📹 Recording Videos
+## Recording Videos
 
 1. Press **V** to start recording
 2. The animation continues normally - zoom, rotate, etc.
 3. Press **V** again to stop
-4. Video saves as `lorenz_YYYYMMDD_HHMMSS.mp4`
+4. Video saves as `lorenz_YYYYMMDD_HHMMSS.mp4` in the project directory
 
 **Output specs:**
 - Resolution: Native framebuffer (e.g., 3840×2160 on Retina)
 - Frame rate: monitor FPS
-- Codec: H.264 (CRF 18 - near lossless quality)
-- Compatible with all video players
+- Codec: H.264
 
 ## 🔬 The Mathematics
 
