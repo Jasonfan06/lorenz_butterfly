@@ -51,6 +51,60 @@ Vec3 rk4_step(const Vec3& p, float dt) {
     );
 }
 
+struct Color {
+    float r, g, b;
+    Color(float r = 1, float g = 1, float b = 1) : r(r), g(g), b(b) {}
+};
+
+Color get_color(float t) {
+    // Smooth saturated rainbow - no white/pastel colors
+    t = fmodf(t, 1.0f);
+    
+    // Saturated color wheel with smooth transitions
+    float h = t * 6.0f;  // 0 to 6
+    int segment = (int)floorf(h);
+    float frac = h - segment;
+    
+    // Smooth the fraction using smoothstep
+    frac = frac * frac * (3.0f - 2.0f * frac);
+    
+    float r, g, b;
+    
+    switch(segment % 6) {
+        case 0:  // Red to Yellow
+            r = 1.0f;
+            g = frac;
+            b = 0.0f;
+            break;
+        case 1:  // Yellow to Green
+            r = 1.0f - frac;
+            g = 1.0f;
+            b = 0.0f;
+            break;
+        case 2:  // Green to Cyan
+            r = 0.0f;
+            g = 1.0f;
+            b = frac;
+            break;
+        case 3:  // Cyan to Blue
+            r = 0.0f;
+            g = 1.0f - frac;
+            b = 1.0f;
+            break;
+        case 4:  // Blue to Magenta
+            r = frac;
+            g = 0.0f;
+            b = 1.0f;
+            break;
+        default:  // Magenta to Red
+            r = 1.0f;
+            g = 0.0f;
+            b = 1.0f - frac;
+            break;
+    }
+    
+    return Color(r, g, b);
+}
 
 class Trajectory {
 public:
